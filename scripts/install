@@ -8,12 +8,12 @@ cp /etc/apt/sources.list /etc/apt/sources.list.bak
 cp -R /etc/apt/sources.list.d /etc/apt/sources.list.d.bak
 
 # Change sources.list with "stable" as distribution
-sed -i "s@ stable \+main @ jessie main @g" /etc/apt/sources.list
+sed -i "s@ stable \+main@ jessie main@g" /etc/apt/sources.list
 sed -i "s@ stable-updates @ jessie-updates @g" /etc/apt/sources.list
 sed -i "s@ stable/updates @ jessie/updates @g" /etc/apt/sources.list
 
 # Idem for sources.list.d/*.list
-sed -i "s@ stable \+main @ jessie main @g" /etc/apt/sources.list.d/*.list
+sed -i "s@ stable \+main@ jessie main@g" /etc/apt/sources.list.d/*.list
 sed -i "s@ stable-updates @ jessie-updates @g" /etc/apt/sources.list.d/*.list
 sed -i "s@ stable/updates @ jessie/updates @g" /etc/apt/sources.list.d/*.list
 
