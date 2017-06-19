@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -eu
+
+# Backup old sources.list
+cp /etc/apt/sources.list /etc/apt/sources.list.bak
+
+cp -R /etc/apt/sources.list.d /etc/apt/sources.list.d.bak
+
+# Change sources.list with "stable" as distribution
+sed -i "s@ stable \+main @ jessie main @g" /etc/apt/sources.list
+sed -i "s@ stable-updates @ jessie-updates @g" /etc/apt/sources.list
+sed -i "s@ stable/updates @ jessie/updates @g" /etc/apt/sources.list
+
+# Idem for sources.list.d/*.list
+sed -i "s@ stable \+main @ jessie main @g" /etc/apt/sources.list.d/*.list
+sed -i "s@ stable-updates @ jessie-updates @g" /etc/apt/sources.list.d/*.list
+sed -i "s@ stable/updates @ jessie/updates @g" /etc/apt/sources.list.d/*.list
+
+# Warn if there is a dangerous app
+bad_apps=$(yunohost app list --installed --raw | grep "^[^ ]" | { grep "osmw\|odoo\|jenkins\|umap\|os\.js" || true; })
+if [ ! -z "$bad_apps" ] ; then
+    >&2 echo "This app could not work correctly: ${bad_apps//:}"
+fi
+
+# Auto remove this app
+echo "* * * * * root PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin yunohost app remove no_stretch && rm -f /etc/cron.d/no_stretch_remove" > /etc/cron.d/no_stretch_remove
+echo "This 'no_stretch' app will be autoremoved soon"

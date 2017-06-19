@@ -1,0 +1,26 @@
+{
+    "name": "No Stretch",
+    "id": "no_stretch",
+    "packaging_format": 1,
+    "description": {
+        "en": "This app prevents to upgrade to debian stretch by mistake.",
+        "fr": "Cette app permet d'éviter d'installer debian stretch par erreur."
+    },
+    "url": "https://github.com/YunoHost-Apps/no_stretch_ynh",
+    "license": "AGPL-3.0",
+    "maintainer": {
+        "name": "ljf",
+        "email": "ljf+yunohost@grimaud.me"
+    },
+    "requirements": {
+        "yunohost": ">> 2.4.0"
+    },
+    "multi_instance": false,
+    "services": [
+    ],
+    "arguments": {
+        "install" : [
+        ]
+    }
+}
+
